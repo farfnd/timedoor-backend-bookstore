@@ -19,4 +19,11 @@ class BookRepository
 
         return $query->get();
     }
+
+    public function getBooksByAuthor($authorId)
+    {
+        return Book::where('author_id', $authorId)
+            ->with(['author', 'category', 'ratings'])
+            ->get();
+    }
 }

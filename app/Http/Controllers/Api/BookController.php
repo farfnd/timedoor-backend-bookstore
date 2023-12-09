@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\BooksGetRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\BooksGetRequest;
 use App\Services\BookService;
 use Illuminate\Http\Request;
 
@@ -22,11 +23,9 @@ class BookController extends Controller
     {
         $validated = $request->validated();
 
-        $limit = $validated['limit'] ?? 10;
-        $search = $validated['search'] ?? '';
+        $authorId = $validated['author_id'] ?? null;
+        $books = $this->bookService->getBooksByAuthor($authorId);
 
-        $books = $this->bookService->getBooks($limit, $search);
-
-        return view('books', compact('limit', 'search', 'books'));
+        return response()->json($books);
     }
 }

@@ -20,6 +20,11 @@ class BookService
         return $this->calculateAverageRatingsAndSort($books, $limit);
     }
 
+    public function getBooksByAuthor($id)
+    {
+        return $this->bookRepository->getBooksByAuthor($id);
+    }
+
     private function calculateAverageRatingsAndSort($books, $limit)
     {
         $books->each(function ($book) {

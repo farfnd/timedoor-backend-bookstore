@@ -6,6 +6,11 @@ use App\Models\Author;
 
 class AuthorService
 {
+    public function getAuthors()
+    {
+        return Author::orderBy('name')->get();
+    }
+
     public function getTopAuthors($limit = 10)
     {
         return Author::withCount(['ratings' => function ($query) {
