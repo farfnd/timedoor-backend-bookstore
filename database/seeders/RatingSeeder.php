@@ -12,6 +12,6 @@ class RatingSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Rating::factory(2000)->create();
+        \App\Models\Rating::factory(500000)->create();
     }
 }

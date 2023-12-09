@@ -12,6 +12,6 @@ class AuthorSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\Author::factory(100)->create();
+        \App\Models\Author::factory(1000)->create();
     }
 }
