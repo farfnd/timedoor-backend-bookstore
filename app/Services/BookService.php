@@ -27,14 +27,18 @@ class BookService
 
     private function calculateAverageRatingsAndSort($books, $limit)
     {
-        $books->each(function ($book) {
+        $sortedBooks = $books->map(function ($book) {
             $avgRating = $book->ratings->avg('score');
             $voterCount = $book->ratings->count();
 
             $book->avgRating = $avgRating;
             $book->voterCount = $voterCount;
-        });
 
-        return $books->sortByDesc('avgRating')->take($limit);
+            return $book;
+        })->sortByDesc(function ($book) {
+            return [$book->avgRating, $book->voterCount];
+        })->values()->take($limit);
+
+        return $sortedBooks;
     }
 }
